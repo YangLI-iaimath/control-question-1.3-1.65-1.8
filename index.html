@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>控制问题</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: "Microsoft YaHei", "PingFang SC", Arial, sans-serif;
+      max-width: 920px;
+      margin: 36px auto;
+      padding: 0 20px 48px;
+      line-height: 1.75;
+      color: #222;
+      background: #f7f8fa;
+    }
+    h1 { font-size: 28px; margin-bottom: 10px; color: #111827; }
+    h2 { font-size: 22px; margin-top: 0; color: #111827; }
+    .page { display: none; }
+    .page.active { display: block; }
+    .intro {
+      background: #fff;
+      border-left: 5px solid #2f6feb;
+      padding: 16px 20px;
+      margin-bottom: 24px;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,.04);
+    }
+    .progress {
+      display: inline-block;
+      margin-bottom: 14px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 700;
+      color: #2f6feb;
+      background: #eef4ff;
+      border: 1px solid #c9ddff;
+    }
+    .question-block, .info-block {
+      border: 1px solid #d9dce3;
+      border-radius: 14px;
+      padding: 18px 20px;
+      margin-bottom: 18px;
+      background: #fff;
+      box-shadow: 0 2px 10px rgba(0,0,0,.03);
+    }
+    .info-block {
+      background: #f8fbff;
+      border-color: #c9ddff;
+    }
+    .question-block.wrong {
+      border-color: #b00020;
+      background: #fff5f6;
+    }
+    .question-title {
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: #111827;
+    }
+    .sub-question { margin-top: 14px; }
+    label { display: block; margin: 7px 0; cursor: pointer; }
+    input[type="radio"] { margin-right: 8px; }
+    input[type="text"] {
+      font-size: 16px;
+      padding: 9px 10px;
+      width: 180px;
+      max-width: 100%;
+      border: 1px solid #c7cad1;
+      border-radius: 8px;
+      background: #fff;
+    }
+    input[type="text"]:focus {
+      outline: none;
+      border-color: #2f6feb;
+      box-shadow: 0 0 0 3px rgba(47,111,235,.12);
+    }
+    .money-line {
+      margin-top: 10px;
+      padding: 10px 12px;
+      background: #f8fbff;
+      border: 1px solid #c9ddff;
+      border-radius: 9px;
+    }
+    .money-value { color: #2f6feb; font-weight: 800; }
+    .error-msg {
+      display: none;
+      color: #b00020;
+      font-weight: 700;
+      margin-top: 10px;
+    }
+    .success-msg, .general-error-msg {
+      display: none;
+      font-weight: 700;
+      margin-top: 18px;
+      padding: 13px 16px;
+      border-radius: 10px;
+    }
+    .success-msg {
+      color: #067647;
+      background: #ecfdf3;
+      border: 1px solid #8fd19e;
+    }
+    .general-error-msg {
+      color: #b00020;
+      background: #fff5f6;
+      border: 1px solid #f1aeb5;
+    }
+    .button-row { margin-top: 22px; }
+    button {
+      font-size: 16px;
+      padding: 11px 20px;
+      border: none;
+      border-radius: 9px;
+      cursor: pointer;
+    }
+    .check-btn { background: #2f6feb; color: white; }
+    .continue-btn { display: none; margin-left: 10px; background: #067647; color: white; }
+    .back-btn { background: #6b7280; color: white; margin-right: 10px; }
+    .finish-page {
+      min-height: 70vh;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    .finish-page.active { display: flex; }
+    .finish-message {
+      font-size: 30px;
+      font-weight: 800;
+      color: #067647;
+      background: #fff;
+      border: 1px solid #8fd19e;
+      border-radius: 18px;
+      padding: 34px 38px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.08);
+    }
+    @media (max-width: 640px) {
+      body { margin: 20px auto; padding: 0 14px 40px; }
+      h1 { font-size: 24px; }
+      h2 { font-size: 20px; }
+      .question-block, .info-block { padding: 15px; }
+      button { width: 100%; margin: 8px 0 0 0 !important; }
+      .finish-message { font-size: 24px; padding: 28px 22px; }
+    }
+  </style>
+</head>
+<body>
+  <h1>控制问题</h1>
+
+  <section id="page1" class="page active">
+    <div class="progress">第 1 部分 / 共 3 部分：无投票阶段</div>
+    <div class="intro">
+      <h2>控制问题 1</h2>
+      <p>为了帮助你更好地了解实验规则，请回答以下控制问题。在输入框中输入你的计算结果，单位为财富点数。</p>
+      <p>在无投票阶段，假设你的编号是 <strong>3</strong>，并和标号分别为 <strong>1、4</strong> 的参与者互动。</p>
+      <p>劳务金额会根据财富点数自动计算：<strong>财富点数 × 5 元</strong>。</p>
+    </div>
+
+    <div class="question-block" id="p1-q1-block">
+      <div class="question-title">1、你_____加入更大的社区：</div>
+      <label><input type="radio" name="p1-q1" value="A">A、可以</label>
+      <label><input type="radio" name="p1-q1" value="B">B、不可以</label>
+      <div class="error-msg" id="p1-q1-error">第1题有误，请重新检查。</div>
+    </div>
+
+    <div class="question-block" id="p1-q2-block">
+      <div class="question-title">2、你_____与标号为 2 的参与者互动：</div>
+      <label><input type="radio" name="p1-q2" value="A">A、可能</label>
+      <label><input type="radio" name="p1-q2" value="B">B、不可能</label>
+      <div class="error-msg" id="p1-q2-error">第2题有误，请重新检查。</div>
+    </div>
+
+    <div class="question-block" id="p1-q3-block">
+      <div class="question-title">3、两个社区的乘数为：</div>
+      <input type="text" id="p1-q3" inputmode="decimal" placeholder="请输入数字">
+      <div class="error-msg" id="p1-q3-error">第3题有误，请重新检查。</div>
+    </div>
+
+    <div class="question-block" id="p1-q4-block">
+      <div class="question-title">4、假设你和 1、4 均未贡献，你最终的财富为：</div>
+      <input type="text" id="p1-q4" inputmode="decimal" placeholder="请输入财富点数">
+      <div class="money-line">对应的劳务为：<span class="money-value" id="p1-q4-money">—</span> 元</div>
+      <div class="error-msg" id="p1-q4-error">第4题有误，请重新检查。</div>
+    </div>
+
+    <div class="question-block" id="p1-q5-block">
+      <div class="question-title">5、假设 1、4 均未贡献，你向 3-1 社区贡献 10 财富，你最终的财富为：</div>
+      <input type="text" id="p1-q5" inputmode="decimal" placeholder="请输入财富点数">
+      <div class="money-line">对应的劳务为：<span class="money-value" id="p1-q5-money">—</span> 元</div>
+      <div class="error-msg" id="p1-q5-error">第5题有误，请重新检查。</div>
+    </div>
+
+    <div class="question-block" id="p1-q6-block">
+      <div class="question-title">6、从上述计算可以发现，你贡献时，你的财富会：</div>
+      <label><input type="radio" name="p1-q6" value="A">A、变高</label>
+      <label><input type="radio" name="p1-q6" value="B">B、不变</label>
+      <label><input type="radio" name="p1-q6" value="C">C、变低</label>
+      <div class="error-msg" id="p1-q6-error">第6题有误，请重新检查。</div>
+    </div>
+
+    <div class="question-block" id="p1-q7-block">
+      <div class="question-title">7、假设你向 3-1 社区贡献 10 财富，1 向 3-1 社区贡献 10 财富，4 未向 3-4 社区贡献，你最终的财富为：</div>
+      <input type="text" id="p1-q7" inputmode="decimal" placeholder="请输入财富点数">
+      <div class="money-line">对应的劳务为：<span class="money-value" id="p1-q7-money">—</span> 元</div>
+      <div class="error-msg" id="p1-q7-error">第7题有误，请重新检查。</div>
+    </div>
+
+    <div class="question-block" id="p1-q8-block">
+      <div class="question-title">8、假设你和 4 均未贡献，1 向 3-1 社区贡献 10 财富，你最终的财富为：</div>
+      <input type="text" id="p1-q8" inputmode="decimal" placeholder="请输入财富点数">
+      <div class="money-line">对应的劳务为：<span class="money-value" id="p1-q8-money">—</span> 元</div>
+      <div class="error-msg" id="p1-q8-error">第8题有误，请重新检查。</div>
+    </div>
+
+    <div class="question-block" id="p1-q9-block">
+      <div class="question-title">9、假设你向 3-4 社区贡献 10 财富，1 向 3-1 社区贡献 10 财富，4 向 3-4 社区贡献 10 财富，你最终的财富为：</div>
+      <input type="text" id="p1-q9" inputmode="decimal" placeholder="请输入财富点数">
+      <div class="money-line">对应的劳务为：<span class="money-value" id="p1-q9-money">—</span> 元</div>
+      <div class="error-msg" id="p1-q9-error">第9题有误，请重新检查。</div>
+    </div>
+
+    <div class="question-block" id="p1-q10-block">
+      <div class="question-title">10、从上述计算可以发现，别人向你所在的社区贡献，你的财富会：</div>
+      <label><input type="radio" name="p1-q10" value="A">A、变高</label>
+      <label><input type="radio" name="p1-q10" value="B">B、不变</label>
+      <label><input type="radio" name="p1-q10" value="C">C、变低</label>
+      <div class="error-msg" id="p1-q10-error">第10题有误，请重新检查。</div>
+    </div>
+
+    <div class="question-block" id="p1-q11-block">
+      <div class="question-title">11、当参与者贡献时，总财富：</div>
+      <label><input type="radio" name="p1-q11" value="A">A、变高</label>
+      <label><input type="radio" name="p1-q11" value="B">B、不变</label>
+      <label><input type="radio" name="p1-q11" value="C">C、变低</label>
+      <div class="error-msg" id="p1-q11-error">第11题有误，请重新检查。</div>
+    </div>
+
+    <div class="button-row">
+      <button class="check-btn" id="p1-check-btn">检查答案</button>
+      <button class="continue-btn" id="p1-continue-btn">继续进入控制问题 2</button>
+    </div>
+    <div class="general-error-msg" id="p1-general-error">仍有题目回答有误，请根据提示重新检查。</div>
+    <div class="success-msg" id="p1-success-msg">控制问题 1 已全部回答正确，请点击继续。</div>
+  </section>
+
+  <section id="page2" class="page">
+    <div class="progress">第 2 部分 / 共 3 部分：有投票阶段</div>
+    <div class="intro">
+      <h2>控制问题 2</h2>
+      <p>为了帮助你更好地了解实验规则，请回答以下控制问题。</p>
+      <p>在有投票阶段，假设你的编号是 <strong>3</strong>，并在无多人社区时和标号分别为 <strong>1、4</strong> 的参与者互动。</p>
+    </div>
+
+    <div class="question-block" id="p2-q1-block">
+      <div class="question-title">1、你_____加入更大的社区：</div>
+      <label><input type="radio" name="p2-q1" value="A">A、可以</label>
+      <label><input type="radio" name="p2-q1" value="B">B、不可以</label>
+      <div class="error-msg" id="p2-q1-error">第1题有误，请重新检查。</div>
+    </div>
+
+    <div class="question-block" id="p2-q2-block">
+      <div class="question-title">2、你_____与标号为 2 的参与者互动：</div>
+      <label><input type="radio" name="p2-q2" value="A">A、可能</label>
+      <label><input type="radio" name="p2-q2" value="B">B、不可能</label>
+      <div class="error-msg" id="p2-q2-error">第2题有误，请重新检查。</div>
+    </div>
+
+    <div class="question-block" id="p2-q3-block">
+      <div class="question-title">3、三人社区的乘数为：</div>
+      <input type="text" id="p2-q3a" inputmode="decimal" placeholder="三人社区乘数">
+      <div class="sub-question">
+        <div class="question-title">四人社区的乘数为：</div>
+        <input type="text" id="p2-q3b" inputmode="decimal" placeholder="四人社区乘数">
+      </div>
+      <div class="error-msg" id="p2-q3-error">第3题有误，请重新检查。</div>
+    </div>
+
+    <div class="question-block" id="p2-q4-block">
+      <div class="question-title">4、假如你和 1、4 投票，2 未投票，那么你将参与：</div>
+      <label><input type="radio" name="p2-q4" value="A">A、两个双人社区</label>
+      <label><input type="radio" name="p2-q4" value="B">B、一个三人社区</label>
+      <label><input type="radio" name="p2-q4" value="C">C、一个双人社区和一个三人社区</label>
+      <label><input type="radio" name="p2-q4" value="D">D、一个四人社区</label>
+      <div class="error-msg" id="p2-q4-error">第4题有误，请重新检查。</div>
+    </div>
+
+    <div class="question-block" id="p2-q5-block">
+      <div class="question-title">5、假如你和 4 投票，2、1 未投票，那么你将参与：</div>
+      <label><input type="radio" name="p2-q5" value="A">A、两个双人社区</label>
+      <label><input type="radio" name="p2-q5" value="B">B、一个三人社区</label>
+      <label><input type="radio" name="p2-q5" value="C">C、一个双人社区和一个三人社区</label>
+      <label><input type="radio" name="p2-q5" value="D">D、一个四人社区</label>
+      <div class="error-msg" id="p2-q5-error">第5题有误，请重新检查。</div>
+    </div>
+
+    <div class="question-block" id="p2-q6-block">
+      <div class="question-title">6、假如你和 1、2 投票，4 未投票，那么你将参与：</div>
+      <label><input type="radio" name="p2-q6" value="A">A、两个双人社区</label>
+      <label><input type="radio" name="p2-q6" value="B">B、一个三人社区</label>
+      <label><input type="radio" name="p2-q6" value="C">C、一个双人社区和一个三人社区</label>
+      <label><input type="radio" name="p2-q6" value="D">D、一个四人社区</label>
+      <div class="error-msg" id="p2-q6-error">第6题有误，请重新检查。</div>
+    </div>
+
+    <div class="question-block" id="p2-q7-block">
+      <div class="question-title">7、假如你和 1、2、4 均投票，那么你将参与：</div>
+      <label><input type="radio" name="p2-q7" value="A">A、两个双人社区</label>
+      <label><input type="radio" name="p2-q7" value="B">B、一个三人社区</label>
+      <label><input type="radio" name="p2-q7" value="C">C、一个双人社区和一个三人社区</label>
+      <label><input type="radio" name="p2-q7" value="D">D、一个四人社区</label>
+      <div class="error-msg" id="p2-q7-error">第7题有误，请重新检查。</div>
+    </div>
+
+    <div class="button-row">
+      <button class="back-btn" id="back1">返回控制问题 1</button>
+      <button class="check-btn" id="p2-check-btn">检查答案</button>
+      <button class="continue-btn" id="p2-continue-btn">继续进入控制问题 3</button>
+    </div>
+    <div class="general-error-msg" id="p2-general-error">仍有题目回答有误，请根据提示重新检查。</div>
+    <div class="success-msg" id="p2-success-msg">控制问题 2 已全部回答正确，请点击继续。</div>
+  </section>
+
+  <section id="page3" class="page">
+    <div class="progress">第 3 部分 / 共 3 部分：多人社区收益计算</div>
+    <div class="intro">
+      <h2>控制问题 3</h2>
+      <p>请根据有投票阶段的规则完成以下问题。</p>
+      <p>劳务金额会根据财富点数自动计算：<strong>财富点数 × 5 元</strong>。</p>
+    </div>
+
+    <div class="question-block" id="p3-q1-block">
+      <div class="question-title">1、假设你和 1、4 形成一个三人社区：</div>
+      <div class="sub-question">
+        你向社区贡献 10 财富，1、4 均未向社区贡献，你最终的财富为：
+        <br><input type="text" id="p3-q1a" inputmode="decimal" placeholder="请输入财富点数">
+        <div class="money-line">对应的劳务为：<span class="money-value" id="p3-q1a-money">—</span> 元</div>
+      </div>
+      <div class="sub-question">
+        你和 1、4 均向社区贡献 10 财富，你最终的财富为：
+        <br><input type="text" id="p3-q1b" inputmode="decimal" placeholder="请输入财富点数">
+        <div class="money-line">对应的劳务为：<span class="money-value" id="p3-q1b-money">—</span> 元</div>
+      </div>
+      <div class="error-msg" id="p3-q1-error">第1题有误，请重新检查。</div>
+    </div>
+
+    <div class="question-block" id="p3-q2-block">
+      <div class="question-title">2、在你和 1、4 向与你相关的社区贡献相同时，三人社区下你的财富_____两个双人社区下你的财富：</div>
+      <label><input type="radio" name="p3-q2" value="A">A、高于</label>
+      <label><input type="radio" name="p3-q2" value="B">B、等于</label>
+      <label><input type="radio" name="p3-q2" value="C">C、低于</label>
+      <div class="error-msg" id="p3-q2-error">第2题有误，请重新检查。</div>
+    </div>
+
+    <div class="question-block" id="p3-q3-block">
+      <div class="question-title">3、在所有人贡献相同且总贡献不为 0 时：</div>
+      <div class="sub-question">
+        <strong>四人社区下所有人的总财富_____存在三人社区下所有人的总财富：</strong>
+        <label><input type="radio" name="p3-q3a" value="A">A、高于</label>
+        <label><input type="radio" name="p3-q3a" value="B">B、等于</label>
+        <label><input type="radio" name="p3-q3a" value="C">C、低于</label>
+      </div>
+      <div class="sub-question">
+        <strong>存在三人社区下所有人的总财富_____仅存在双人社区下所有人的总财富：</strong>
+        <label><input type="radio" name="p3-q3b" value="A">A、高于</label>
+        <label><input type="radio" name="p3-q3b" value="B">B、等于</label>
+        <label><input type="radio" name="p3-q3b" value="C">C、低于</label>
+      </div>
+      <div class="error-msg" id="p3-q3-error">第3题有误，请重新检查。</div>
+    </div>
+
+    <div class="question-block" id="p3-q4-block">
+      <div class="question-title">4、请根据下列情境计算最终财富：</div>
+      <div class="sub-question">
+        你和 1、4 形成一个三人社区，你向三人社区贡献 10 财富，1、4 均未贡献，你最终的财富为：
+        <br><input type="text" id="p3-q4a" inputmode="decimal" placeholder="请输入财富点数">
+        <div class="money-line">对应的劳务为：<span class="money-value" id="p3-q4a-money">—</span> 元</div>
+      </div>
+      <div class="sub-question">
+        你和 1、2、4 形成一个四人社区，你向四人社区贡献 10 财富，1、2、4 均未贡献，你最终的财富为：
+        <br><input type="text" id="p3-q4b" inputmode="decimal" placeholder="请输入财富点数">
+        <div class="money-line">对应的劳务为：<span class="money-value" id="p3-q4b-money">—</span> 元</div>
+      </div>
+      <div class="sub-question">
+        1、2 均向四人社区贡献 10 财富，你和 4 均未贡献，你最终的财富为：
+        <br><input type="text" id="p3-q4c" inputmode="decimal" placeholder="请输入财富点数">
+        <div class="money-line">对应的劳务为：<span class="money-value" id="p3-q4c-money">—</span> 元</div>
+      </div>
+      <div class="error-msg" id="p3-q4-error">第4题有误，请重新检查。</div>
+    </div>
+
+    <div class="info-block">
+      <strong>5、规则理解提示：</strong>
+      <p>虽然进入更大的社区可能提升潜在的总财富，但你的个人财富受他人的影响可能降低，因为你的贡献可能让部分搭便车的人受益，你需要谨慎选择是否进入多人社区。</p>
+    </div>
+
+    <div class="question-block" id="p3-q6-block">
+      <div class="question-title">6、假设你和 1、2 形成一个三人社区：</div>
+      <div class="sub-question">
+        你向三人社区贡献 10 财富，1、2 均未贡献，4 向双人社区贡献 10 财富，你最终的财富为：
+        <br><input type="text" id="p3-q6a" inputmode="decimal" placeholder="请输入财富点数">
+        <div class="money-line">对应的劳务为：<span class="money-value" id="p3-q6a-money">—</span> 元</div>
+      </div>
+      <div class="sub-question">
+        你向双人社区贡献 10 财富，1 向三人社区贡献 10 财富，4 向双人社区贡献 10 财富，2 未贡献，你最终的财富为：
+        <br><input type="text" id="p3-q6b" inputmode="decimal" placeholder="请输入财富点数">
+        <div class="money-line">对应的劳务为：<span class="money-value" id="p3-q6b-money">—</span> 元</div>
+      </div>
+      <div class="error-msg" id="p3-q6-error">第6题有误，请重新检查。</div>
+    </div>
+
+    <div class="info-block">
+      <strong>7、规则理解提示：</strong>
+      <p>你参与的社区可能具有不同乘数：三人社区固定为 <strong>1.65</strong>，四人社区固定为 <strong>1.8</strong>，双人社区固定为 <strong>1.3</strong>。</p>
+    </div>
+
+    <div class="button-row">
+      <button class="back-btn" id="back2">返回控制问题 2</button>
+      <button class="check-btn" id="p3-check-btn">检查答案</button>
+      <button class="continue-btn" id="p3-continue-btn">完成</button>
+    </div>
+    <div class="general-error-msg" id="p3-general-error">仍有题目回答有误，请根据提示重新检查。</div>
+    <div class="success-msg" id="p3-success-msg">控制问题 3 已全部回答正确，请点击完成。</div>
+  </section>
+
+  <section id="finish-page" class="finish-page">
+    <div class="finish-message">恭喜你完成所有控制问题，可以参与实验了！</div>
+  </section>
+
+  <script>
+    const p1Answers = {q1:"B",q2:"B",q3:1.3,q4:10,q5:6.5,q6:"C",q7:13,q8:16.5,q9:19.5,q10:"A",q11:"A"};
+    const p2Answers = {q1:"A",q2:"A",q3a:1.65,q3b:1.8,q4:"B",q5:"A",q6:"C",q7:"D"};
+    const p3Answers = {q1a:5.5,q1b:16.5,q2:"C",q3a:"A",q3b:"A",q4a:5.5,q4b:4.5,q4c:19,q6a:12,q6b:18.5};
+
+    function normalizeNumber(value) {
+      const cleaned = String(value ?? "").trim().replace(/，/g,".").replace(/。/g,".").replace(/,/g,"").replace(/\s+/g,"");
+      return cleaned === "" ? NaN : Number(cleaned);
+    }
+    function getNum(id){ return normalizeNumber(document.getElementById(id).value); }
+    function getRadio(name){ const x=document.querySelector('input[name="'+name+'"]:checked'); return x?x.value:""; }
+    function numOK(a,b){ return !Number.isNaN(a) && Math.abs(a-b)<1e-6; }
+    function setStatus(id,wrong){
+      document.getElementById(id+"-block").classList.toggle("wrong",wrong);
+      document.getElementById(id+"-error").style.display=wrong?"block":"none";
+    }
+    function switchPage(id){
+      document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));
+      document.getElementById("finish-page").classList.remove("active");
+      document.getElementById(id).classList.add("active");
+      window.scrollTo({top:0,behavior:"smooth"});
+    }
+    function showFinish(){
+      document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));
+      document.getElementById("finish-page").classList.add("active");
+      window.scrollTo({top:0,behavior:"smooth"});
+    }
+    function updateMoney(id){
+      const value=getNum(id), out=document.getElementById(id+"-money");
+      if(Number.isNaN(value)){out.textContent="—";return;}
+      const amount=value*5;
+      out.textContent=Number.isInteger(amount)?String(amount):amount.toFixed(2).replace(/0+$/,"").replace(/\.$/,"");
+    }
+
+    ["p1-q4","p1-q5","p1-q7","p1-q8","p1-q9",
+     "p3-q1a","p3-q1b","p3-q4a","p3-q4b","p3-q4c","p3-q6a","p3-q6b"
+    ].forEach(id=>document.getElementById(id).addEventListener("input",()=>updateMoney(id)));
+
+    document.getElementById("p1-check-btn").addEventListener("click",()=>{
+      const a={q1:getRadio("p1-q1"),q2:getRadio("p1-q2"),q3:getNum("p1-q3"),q4:getNum("p1-q4"),q5:getNum("p1-q5"),q6:getRadio("p1-q6"),q7:getNum("p1-q7"),q8:getNum("p1-q8"),q9:getNum("p1-q9"),q10:getRadio("p1-q10"),q11:getRadio("p1-q11")};
+      const e={q1:a.q1!==p1Answers.q1,q2:a.q2!==p1Answers.q2,q3:!numOK(a.q3,p1Answers.q3),q4:!numOK(a.q4,p1Answers.q4),q5:!numOK(a.q5,p1Answers.q5),q6:a.q6!==p1Answers.q6,q7:!numOK(a.q7,p1Answers.q7),q8:!numOK(a.q8,p1Answers.q8),q9:!numOK(a.q9,p1Answers.q9),q10:a.q10!==p1Answers.q10,q11:a.q11!==p1Answers.q11};
+      Object.keys(e).forEach(k=>setStatus("p1-"+k,e[k]));
+      const bad=Object.values(e).some(Boolean);
+      document.getElementById("p1-general-error").style.display=bad?"block":"none";
+      document.getElementById("p1-success-msg").style.display=bad?"none":"block";
+      document.getElementById("p1-continue-btn").style.display=bad?"none":"inline-block";
+    });
+
+    document.getElementById("p2-check-btn").addEventListener("click",()=>{
+      const a={q1:getRadio("p2-q1"),q2:getRadio("p2-q2"),q3a:getNum("p2-q3a"),q3b:getNum("p2-q3b"),q4:getRadio("p2-q4"),q5:getRadio("p2-q5"),q6:getRadio("p2-q6"),q7:getRadio("p2-q7")};
+      const e={q1:a.q1!==p2Answers.q1,q2:a.q2!==p2Answers.q2,q3:!numOK(a.q3a,p2Answers.q3a)||!numOK(a.q3b,p2Answers.q3b),q4:a.q4!==p2Answers.q4,q5:a.q5!==p2Answers.q5,q6:a.q6!==p2Answers.q6,q7:a.q7!==p2Answers.q7};
+      setStatus("p2-q1",e.q1);setStatus("p2-q2",e.q2);setStatus("p2-q3",e.q3);setStatus("p2-q4",e.q4);setStatus("p2-q5",e.q5);setStatus("p2-q6",e.q6);setStatus("p2-q7",e.q7);
+      const bad=Object.values(e).some(Boolean);
+      document.getElementById("p2-general-error").style.display=bad?"block":"none";
+      document.getElementById("p2-success-msg").style.display=bad?"none":"block";
+      document.getElementById("p2-continue-btn").style.display=bad?"none":"inline-block";
+    });
+
+    document.getElementById("p3-check-btn").addEventListener("click",()=>{
+      const a={q1a:getNum("p3-q1a"),q1b:getNum("p3-q1b"),q2:getRadio("p3-q2"),q3a:getRadio("p3-q3a"),q3b:getRadio("p3-q3b"),q4a:getNum("p3-q4a"),q4b:getNum("p3-q4b"),q4c:getNum("p3-q4c"),q6a:getNum("p3-q6a"),q6b:getNum("p3-q6b")};
+      const e={q1:!numOK(a.q1a,p3Answers.q1a)||!numOK(a.q1b,p3Answers.q1b),q2:a.q2!==p3Answers.q2,q3:a.q3a!==p3Answers.q3a||a.q3b!==p3Answers.q3b,q4:!numOK(a.q4a,p3Answers.q4a)||!numOK(a.q4b,p3Answers.q4b)||!numOK(a.q4c,p3Answers.q4c),q6:!numOK(a.q6a,p3Answers.q6a)||!numOK(a.q6b,p3Answers.q6b)};
+      setStatus("p3-q1",e.q1);setStatus("p3-q2",e.q2);setStatus("p3-q3",e.q3);setStatus("p3-q4",e.q4);setStatus("p3-q6",e.q6);
+      const bad=Object.values(e).some(Boolean);
+      document.getElementById("p3-general-error").style.display=bad?"block":"none";
+      document.getElementById("p3-success-msg").style.display=bad?"none":"block";
+      document.getElementById("p3-continue-btn").style.display=bad?"none":"inline-block";
+    });
+
+    document.getElementById("p1-continue-btn").addEventListener("click",()=>switchPage("page2"));
+    document.getElementById("p2-continue-btn").addEventListener("click",()=>switchPage("page3"));
+    document.getElementById("p3-continue-btn").addEventListener("click",showFinish);
+    document.getElementById("back1").addEventListener("click",()=>switchPage("page1"));
+    document.getElementById("back2").addEventListener("click",()=>switchPage("page2"));
+  </script>
+</body>
+</html>
