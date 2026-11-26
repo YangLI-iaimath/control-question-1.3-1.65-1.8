@@ -153,11 +153,10 @@
     <div class="progress">第 1 部分 / 共 3 部分：无投票阶段</div>
     <div class="intro">
       <h2>控制问题 1</h2>
-      <p>为了帮助你更好地了解实验规则，请回答以下控制问题。在输入框中输入你的计算结果，单位为财富点数。</p>
+      <p>为了帮助你更好地了解实验规则，请回答以下控制问题。在输入框中输入你的计算结果，单位为财富点数，每个回合开始每位参与者都会有10点初始财富。</p>
       <p>在无投票阶段，假设你的编号是 <strong>3</strong>，并和标号分别为 <strong>1、4</strong> 的参与者互动。</p>
       <p>劳务金额会根据财富点数自动计算：<strong>财富点数 × 5 元</strong>。</p>
     </div>
-
     <div class="question-block" id="p1-q1-block">
       <div class="question-title">1、你_____加入更大的社区：</div>
       <label><input type="radio" name="p1-q1" value="A">A、可以</label>
@@ -173,7 +172,7 @@
     </div>
 
     <div class="question-block" id="p1-q3-block">
-      <div class="question-title">3、两人社区的乘数为：</div>
+      <div class="question-title">3、双人社区的乘数为：</div>
       <input type="text" id="p1-q3" inputmode="decimal" placeholder="请输入数字">
       <div class="error-msg" id="p1-q3-error">第3题有误，请重新检查。</div>
     </div>
@@ -186,57 +185,41 @@
     </div>
 
     <div class="question-block" id="p1-q5-block">
-      <div class="question-title">5、假设 1、4 均未贡献，你向 3-1 社区贡献 10 财富，你最终的财富为：</div>
+      <div class="question-title">5、假设你向 3-1 社区贡献 10 财富，1 向 3-1 社区贡献 10 财富，4 未向 3-4 社区贡献，你最终的财富为：</div>
       <input type="text" id="p1-q5" inputmode="decimal" placeholder="请输入财富点数">
       <div class="money-line">对应的劳务为：<span class="money-value" id="p1-q5-money">—</span> 元</div>
       <div class="error-msg" id="p1-q5-error">第5题有误，请重新检查。</div>
     </div>
 
     <div class="question-block" id="p1-q6-block">
-      <div class="question-title">6、从上述计算可以发现，你贡献时，你的财富会：</div>
-      <label><input type="radio" name="p1-q6" value="A">A、变高</label>
-      <label><input type="radio" name="p1-q6" value="B">B、不变</label>
-      <label><input type="radio" name="p1-q6" value="C">C、变低</label>
+      <div class="question-title">6、假设你和 4 均未贡献，1 向 3-1 社区贡献 10 财富，你最终的财富为：</div>
+      <input type="text" id="p1-q6" inputmode="decimal" placeholder="请输入财富点数">
+      <div class="money-line">对应的劳务为：<span class="money-value" id="p1-q6-money">—</span> 元</div>
       <div class="error-msg" id="p1-q6-error">第6题有误，请重新检查。</div>
     </div>
 
     <div class="question-block" id="p1-q7-block">
-      <div class="question-title">7、假设你向 3-1 社区贡献 10 财富，1 向 3-1 社区贡献 10 财富，4 未向 3-4 社区贡献，你最终的财富为：</div>
+      <div class="question-title">7、假设你向 3-4 社区贡献 10 财富，1 向 3-1 社区贡献 10 财富，4 向 3-4 社区贡献 10 财富，你最终的财富为：</div>
       <input type="text" id="p1-q7" inputmode="decimal" placeholder="请输入财富点数">
       <div class="money-line">对应的劳务为：<span class="money-value" id="p1-q7-money">—</span> 元</div>
       <div class="error-msg" id="p1-q7-error">第7题有误，请重新检查。</div>
     </div>
 
     <div class="question-block" id="p1-q8-block">
-      <div class="question-title">8、假设你和 4 均未贡献，1 向 3-1 社区贡献 10 财富，你最终的财富为：</div>
-      <input type="text" id="p1-q8" inputmode="decimal" placeholder="请输入财富点数">
-      <div class="money-line">对应的劳务为：<span class="money-value" id="p1-q8-money">—</span> 元</div>
+      <div class="question-title">8、从上述计算可以发现，别人向你所在的社区贡献，你的财富会：</div>
+      <label><input type="radio" name="p1-q8" value="A">A、变高</label>
+      <label><input type="radio" name="p1-q8" value="B">B、不变</label>
+      <label><input type="radio" name="p1-q8" value="C">C、变低</label>
       <div class="error-msg" id="p1-q8-error">第8题有误，请重新检查。</div>
     </div>
 
     <div class="question-block" id="p1-q9-block">
-      <div class="question-title">9、假设你向 3-4 社区贡献 10 财富，1 向 3-1 社区贡献 10 财富，4 向 3-4 社区贡献 10 财富，你最终的财富为：</div>
-      <input type="text" id="p1-q9" inputmode="decimal" placeholder="请输入财富点数">
-      <div class="money-line">对应的劳务为：<span class="money-value" id="p1-q9-money">—</span> 元</div>
+      <div class="question-title">9、当参与者贡献时，总财富：</div>
+      <label><input type="radio" name="p1-q9" value="A">A、变高</label>
+      <label><input type="radio" name="p1-q9" value="B">B、不变</label>
+      <label><input type="radio" name="p1-q9" value="C">C、变低</label>
       <div class="error-msg" id="p1-q9-error">第9题有误，请重新检查。</div>
     </div>
-
-    <div class="question-block" id="p1-q10-block">
-      <div class="question-title">10、从上述计算可以发现，别人向你所在的社区贡献，你的财富会：</div>
-      <label><input type="radio" name="p1-q10" value="A">A、变高</label>
-      <label><input type="radio" name="p1-q10" value="B">B、不变</label>
-      <label><input type="radio" name="p1-q10" value="C">C、变低</label>
-      <div class="error-msg" id="p1-q10-error">第10题有误，请重新检查。</div>
-    </div>
-
-    <div class="question-block" id="p1-q11-block">
-      <div class="question-title">11、当参与者贡献时，总财富：</div>
-      <label><input type="radio" name="p1-q11" value="A">A、变高</label>
-      <label><input type="radio" name="p1-q11" value="B">B、不变</label>
-      <label><input type="radio" name="p1-q11" value="C">C、变低</label>
-      <div class="error-msg" id="p1-q11-error">第11题有误，请重新检查。</div>
-    </div>
-
     <div class="button-row">
       <button class="check-btn" id="p1-check-btn">检查答案</button>
       <button class="continue-btn" id="p1-continue-btn">继续进入控制问题 2</button>
@@ -326,27 +309,19 @@
     <div class="progress">第 3 部分 / 共 3 部分：多人社区收益计算</div>
     <div class="intro">
       <h2>控制问题 3</h2>
-      <p>请根据有投票阶段的规则完成以下问题。</p>
+      <p>请根据有投票阶段的规则完成以下问题，单位为财富点数，每个回合开始每位参与者都会有10点初始财富。</p>
       <p>劳务金额会根据财富点数自动计算：<strong>财富点数 × 5 元</strong>。</p>
     </div>
 
     <div class="question-block" id="p3-q1-block">
-      <div class="question-title">1、假设你和 1、4 形成一个三人社区：</div>
-      <div class="sub-question">
-        你向社区贡献 10 财富，1、4 均未向社区贡献，你最终的财富为：
-        <br><input type="text" id="p3-q1a" inputmode="decimal" placeholder="请输入财富点数">
-        <div class="money-line">对应的劳务为：<span class="money-value" id="p3-q1a-money">—</span> 元</div>
-      </div>
-      <div class="sub-question">
-        你和 1、4 均向社区贡献 10 财富，你最终的财富为：
-        <br><input type="text" id="p3-q1b" inputmode="decimal" placeholder="请输入财富点数">
-        <div class="money-line">对应的劳务为：<span class="money-value" id="p3-q1b-money">—</span> 元</div>
-      </div>
+      <div class="question-title">1、假设你和 1、4 形成一个三人社区，你和 1 向社区贡献 10 财富，4 未向社区贡献，你最终的财富为：</div>
+      <input type="text" id="p3-q1" inputmode="decimal" placeholder="请输入财富点数">
+      <div class="money-line">对应的劳务为：<span class="money-value" id="p3-q1-money">—</span> 元</div>
       <div class="error-msg" id="p3-q1-error">第1题有误，请重新检查。</div>
     </div>
 
     <div class="question-block" id="p3-q2-block">
-      <div class="question-title">2、在你和 1、4 向与你相关的社区贡献相同时，三人社区下你的财富_____两个双人社区下你的财富：</div>
+      <div class="question-title">2、从上述计算可以发现，在你和 1、4 向与你相关的社区贡献相同时，三人社区下你的财富_____两个双人社区下你的财富：</div>
       <label><input type="radio" name="p3-q2" value="A">A、高于</label>
       <label><input type="radio" name="p3-q2" value="B">B、等于</label>
       <label><input type="radio" name="p3-q2" value="C">C、低于</label>
@@ -373,32 +348,42 @@
     <div class="question-block" id="p3-q4-block">
       <div class="question-title">4、请根据下列情境计算最终财富：</div>
       <div class="sub-question">
-        你和 1、4 形成一个三人社区，你向三人社区贡献 10 财富，1、4 均未贡献，你最终的财富为：
+        你和 1、4 形成一个三人社区，你向三人社区贡献 10 财富，1、4 均未向三人社区贡献，你最终的财富为：
         <br><input type="text" id="p3-q4a" inputmode="decimal" placeholder="请输入财富点数">
         <div class="money-line">对应的劳务为：<span class="money-value" id="p3-q4a-money">—</span> 元</div>
       </div>
       <div class="sub-question">
-        你和 1、2、4 形成一个四人社区，你向四人社区贡献 10 财富，1、2、4 均未贡献，你最终的财富为：
+        你和 1、2、4 形成一个四人社区，你向四人社区贡献 10 财富，1、2、4 均未向四人社区贡献，你最终的财富为：
         <br><input type="text" id="p3-q4b" inputmode="decimal" placeholder="请输入财富点数">
         <div class="money-line">对应的劳务为：<span class="money-value" id="p3-q4b-money">—</span> 元</div>
-      </div>
-      <div class="sub-question">
-        1、2 均向四人社区贡献 10 财富，你和 4 均未贡献，你最终的财富为：
-        <br><input type="text" id="p3-q4c" inputmode="decimal" placeholder="请输入财富点数">
-        <div class="money-line">对应的劳务为：<span class="money-value" id="p3-q4c-money">—</span> 元</div>
       </div>
       <div class="error-msg" id="p3-q4-error">第4题有误，请重新检查。</div>
     </div>
 
-    <div class="info-block">
-      <strong>5、规则理解提示：</strong>
-      <p>虽然进入更大的社区可能提升潜在的总财富，但你的个人财富受他人的影响可能降低，因为你的贡献可能让部分搭便车的人受益，你需要谨慎选择是否进入多人社区。</p>
+    <div class="question-block" id="p3-q5-block">
+      <div class="question-title">5、请根据下列情境计算最终财富：</div>
+      <div class="sub-question">
+        你和 1、4 形成一个三人社区，你和 1、4 均向三人社区贡献 10 财富，你最终的财富为：
+        <br><input type="text" id="p3-q5a" inputmode="decimal" placeholder="请输入财富点数">
+        <div class="money-line">对应的劳务为：<span class="money-value" id="p3-q5a-money">—</span> 元</div>
+      </div>
+      <div class="sub-question">
+        你和 1、2、4 形成一个四人社区，你和 1、2、4 均向四人社区贡献 10 财富，你最终的财富为：
+        <br><input type="text" id="p3-q5b" inputmode="decimal" placeholder="请输入财富点数">
+        <div class="money-line">对应的劳务为：<span class="money-value" id="p3-q5b-money">—</span> 元</div>
+      </div>
+      <div class="sub-question">
+        1、2 均向四人社区贡献 10 财富，你和 4 均未向四人社区贡献，你最终的财富为：
+        <br><input type="text" id="p3-q5c" inputmode="decimal" placeholder="请输入财富点数">
+        <div class="money-line">对应的劳务为：<span class="money-value" id="p3-q5c-money">—</span> 元</div>
+      </div>
+      <div class="error-msg" id="p3-q5-error">第5题有误，请重新检查。</div>
     </div>
 
     <div class="question-block" id="p3-q6-block">
       <div class="question-title">6、假设你和 1、2 形成一个三人社区：</div>
       <div class="sub-question">
-        你向三人社区贡献 10 财富，1、2 均未贡献，4 向双人社区贡献 10 财富，你最终的财富为：
+        你和 1 向三人社区贡献 10 财富，2 未向三人社区贡献，4 向双人社区贡献 10 财富，你最终的财富为：
         <br><input type="text" id="p3-q6a" inputmode="decimal" placeholder="请输入财富点数">
         <div class="money-line">对应的劳务为：<span class="money-value" id="p3-q6a-money">—</span> 元</div>
       </div>
@@ -429,9 +414,9 @@
   </section>
 
   <script>
-    const p1Answers = {q1:"B",q2:"B",q3:1.3,q4:10,q5:6.5,q6:"C",q7:13,q8:16.5,q9:19.5,q10:"A",q11:"A"};
+    const p1Answers = {q1:"B",q2:"B",q3:1.3,q4:10,q5:13,q6:16.5,q7:19.5,q8:"A",q9:"A"};
     const p2Answers = {q1:"A",q2:"A",q3a:1.65,q3b:1.8,q4:"B",q5:"A",q6:"C",q7:"D"};
-    const p3Answers = {q1a:5.5,q1b:16.5,q2:"C",q3a:"A",q3b:"A",q4a:5.5,q4b:4.5,q4c:19,q6a:12,q6b:18.5};
+    const p3Answers = {q1:11,q2:"C",q3a:"A",q3b:"A",q4a:5.5,q4b:4.5,q5a:16.5,q5b:18,q5c:19,q6a:17.5,q6b:18.5};
 
     function normalizeNumber(value) {
       const cleaned = String(value ?? "").trim().replace(/，/g,".").replace(/。/g,".").replace(/,/g,"").replace(/\s+/g,"");
@@ -462,13 +447,12 @@
       out.textContent=Number.isInteger(amount)?String(amount):amount.toFixed(2).replace(/0+$/,"").replace(/\.$/,"");
     }
 
-    ["p1-q4","p1-q5","p1-q7","p1-q8","p1-q9",
-     "p3-q1a","p3-q1b","p3-q4a","p3-q4b","p3-q4c","p3-q6a","p3-q6b"
-    ].forEach(id=>document.getElementById(id).addEventListener("input",()=>updateMoney(id)));
+    ["p1-q4","p1-q5","p1-q6","p1-q7","p3-q1","p3-q4a","p3-q4b","p3-q5a","p3-q5b","p3-q5c","p3-q6a","p3-q6b"]
+      .forEach(id=>document.getElementById(id).addEventListener("input",()=>updateMoney(id)));
 
     document.getElementById("p1-check-btn").addEventListener("click",()=>{
-      const a={q1:getRadio("p1-q1"),q2:getRadio("p1-q2"),q3:getNum("p1-q3"),q4:getNum("p1-q4"),q5:getNum("p1-q5"),q6:getRadio("p1-q6"),q7:getNum("p1-q7"),q8:getNum("p1-q8"),q9:getNum("p1-q9"),q10:getRadio("p1-q10"),q11:getRadio("p1-q11")};
-      const e={q1:a.q1!==p1Answers.q1,q2:a.q2!==p1Answers.q2,q3:!numOK(a.q3,p1Answers.q3),q4:!numOK(a.q4,p1Answers.q4),q5:!numOK(a.q5,p1Answers.q5),q6:a.q6!==p1Answers.q6,q7:!numOK(a.q7,p1Answers.q7),q8:!numOK(a.q8,p1Answers.q8),q9:!numOK(a.q9,p1Answers.q9),q10:a.q10!==p1Answers.q10,q11:a.q11!==p1Answers.q11};
+      const a={q1:getRadio("p1-q1"),q2:getRadio("p1-q2"),q3:getNum("p1-q3"),q4:getNum("p1-q4"),q5:getNum("p1-q5"),q6:getNum("p1-q6"),q7:getNum("p1-q7"),q8:getRadio("p1-q8"),q9:getRadio("p1-q9")};
+      const e={q1:a.q1!==p1Answers.q1,q2:a.q2!==p1Answers.q2,q3:!numOK(a.q3,p1Answers.q3),q4:!numOK(a.q4,p1Answers.q4),q5:!numOK(a.q5,p1Answers.q5),q6:!numOK(a.q6,p1Answers.q6),q7:!numOK(a.q7,p1Answers.q7),q8:a.q8!==p1Answers.q8,q9:a.q9!==p1Answers.q9};
       Object.keys(e).forEach(k=>setStatus("p1-"+k,e[k]));
       const bad=Object.values(e).some(Boolean);
       document.getElementById("p1-general-error").style.display=bad?"block":"none";
@@ -487,9 +471,9 @@
     });
 
     document.getElementById("p3-check-btn").addEventListener("click",()=>{
-      const a={q1a:getNum("p3-q1a"),q1b:getNum("p3-q1b"),q2:getRadio("p3-q2"),q3a:getRadio("p3-q3a"),q3b:getRadio("p3-q3b"),q4a:getNum("p3-q4a"),q4b:getNum("p3-q4b"),q4c:getNum("p3-q4c"),q6a:getNum("p3-q6a"),q6b:getNum("p3-q6b")};
-      const e={q1:!numOK(a.q1a,p3Answers.q1a)||!numOK(a.q1b,p3Answers.q1b),q2:a.q2!==p3Answers.q2,q3:a.q3a!==p3Answers.q3a||a.q3b!==p3Answers.q3b,q4:!numOK(a.q4a,p3Answers.q4a)||!numOK(a.q4b,p3Answers.q4b)||!numOK(a.q4c,p3Answers.q4c),q6:!numOK(a.q6a,p3Answers.q6a)||!numOK(a.q6b,p3Answers.q6b)};
-      setStatus("p3-q1",e.q1);setStatus("p3-q2",e.q2);setStatus("p3-q3",e.q3);setStatus("p3-q4",e.q4);setStatus("p3-q6",e.q6);
+      const a={q1:getNum("p3-q1"),q2:getRadio("p3-q2"),q3a:getRadio("p3-q3a"),q3b:getRadio("p3-q3b"),q4a:getNum("p3-q4a"),q4b:getNum("p3-q4b"),q5a:getNum("p3-q5a"),q5b:getNum("p3-q5b"),q5c:getNum("p3-q5c"),q6a:getNum("p3-q6a"),q6b:getNum("p3-q6b")};
+      const e={q1:!numOK(a.q1,p3Answers.q1),q2:a.q2!==p3Answers.q2,q3:a.q3a!==p3Answers.q3a||a.q3b!==p3Answers.q3b,q4:!numOK(a.q4a,p3Answers.q4a)||!numOK(a.q4b,p3Answers.q4b),q5:!numOK(a.q5a,p3Answers.q5a)||!numOK(a.q5b,p3Answers.q5b)||!numOK(a.q5c,p3Answers.q5c),q6:!numOK(a.q6a,p3Answers.q6a)||!numOK(a.q6b,p3Answers.q6b)};
+      setStatus("p3-q1",e.q1);setStatus("p3-q2",e.q2);setStatus("p3-q3",e.q3);setStatus("p3-q4",e.q4);setStatus("p3-q5",e.q5);setStatus("p3-q6",e.q6);
       const bad=Object.values(e).some(Boolean);
       document.getElementById("p3-general-error").style.display=bad?"block":"none";
       document.getElementById("p3-success-msg").style.display=bad?"none":"block";
