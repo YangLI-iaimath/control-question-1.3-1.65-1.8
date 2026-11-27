@@ -320,14 +320,6 @@
       <div class="error-msg" id="p3-q1-error">第1题有误，请重新检查。</div>
     </div>
 
-    <div class="question-block" id="p3-q2-block">
-      <div class="question-title">2、从上述计算可以发现，在你和 1、4 向与你相关的社区贡献相同时，三人社区下你的财富_____两个双人社区下你的财富：</div>
-      <label><input type="radio" name="p3-q2" value="A">A、高于</label>
-      <label><input type="radio" name="p3-q2" value="B">B、等于</label>
-      <label><input type="radio" name="p3-q2" value="C">C、低于</label>
-      <div class="error-msg" id="p3-q2-error">第2题有误，请重新检查。</div>
-    </div>
-
     <div class="question-block" id="p3-q3-block">
       <div class="question-title">3、在所有人贡献相同且总贡献不为 0 时：</div>
       <div class="sub-question">
@@ -416,7 +408,7 @@
   <script>
     const p1Answers = {q1:"B",q2:"B",q3:1.3,q4:10,q5:13,q6:16.5,q7:19.5,q8:"A",q9:"A"};
     const p2Answers = {q1:"A",q2:"A",q3a:1.65,q3b:1.8,q4:"B",q5:"A",q6:"C",q7:"D"};
-    const p3Answers = {q1:11,q2:"C",q3a:"A",q3b:"A",q4a:5.5,q4b:4.5,q5a:16.5,q5b:18,q5c:19,q6a:17.5,q6b:18.5};
+    const p3Answers = {q1:11,q3a:"A",q3b:"A",q4a:5.5,q4b:4.5,q5a:16.5,q5b:18,q5c:19,q6a:17.5,q6b:18.5};
 
     function normalizeNumber(value) {
       const cleaned = String(value ?? "").trim().replace(/，/g,".").replace(/。/g,".").replace(/,/g,"").replace(/\s+/g,"");
@@ -471,9 +463,9 @@
     });
 
     document.getElementById("p3-check-btn").addEventListener("click",()=>{
-      const a={q1:getNum("p3-q1"),q2:getRadio("p3-q2"),q3a:getRadio("p3-q3a"),q3b:getRadio("p3-q3b"),q4a:getNum("p3-q4a"),q4b:getNum("p3-q4b"),q5a:getNum("p3-q5a"),q5b:getNum("p3-q5b"),q5c:getNum("p3-q5c"),q6a:getNum("p3-q6a"),q6b:getNum("p3-q6b")};
-      const e={q1:!numOK(a.q1,p3Answers.q1),q2:a.q2!==p3Answers.q2,q3:a.q3a!==p3Answers.q3a||a.q3b!==p3Answers.q3b,q4:!numOK(a.q4a,p3Answers.q4a)||!numOK(a.q4b,p3Answers.q4b),q5:!numOK(a.q5a,p3Answers.q5a)||!numOK(a.q5b,p3Answers.q5b)||!numOK(a.q5c,p3Answers.q5c),q6:!numOK(a.q6a,p3Answers.q6a)||!numOK(a.q6b,p3Answers.q6b)};
-      setStatus("p3-q1",e.q1);setStatus("p3-q2",e.q2);setStatus("p3-q3",e.q3);setStatus("p3-q4",e.q4);setStatus("p3-q5",e.q5);setStatus("p3-q6",e.q6);
+      const a={q1:getNum("p3-q1"),q3a:getRadio("p3-q3a"),q3b:getRadio("p3-q3b"),q4a:getNum("p3-q4a"),q4b:getNum("p3-q4b"),q5a:getNum("p3-q5a"),q5b:getNum("p3-q5b"),q5c:getNum("p3-q5c"),q6a:getNum("p3-q6a"),q6b:getNum("p3-q6b")};
+      const e={q1:!numOK(a.q1,p3Answers.q1),q3:a.q3a!==p3Answers.q3a||a.q3b!==p3Answers.q3b,q4:!numOK(a.q4a,p3Answers.q4a)||!numOK(a.q4b,p3Answers.q4b),q5:!numOK(a.q5a,p3Answers.q5a)||!numOK(a.q5b,p3Answers.q5b)||!numOK(a.q5c,p3Answers.q5c),q6:!numOK(a.q6a,p3Answers.q6a)||!numOK(a.q6b,p3Answers.q6b)};
+      setStatus("p3-q1",e.q1);setStatus("p3-q3",e.q3);setStatus("p3-q4",e.q4);setStatus("p3-q5",e.q5);setStatus("p3-q6",e.q6);
       const bad=Object.values(e).some(Boolean);
       document.getElementById("p3-general-error").style.display=bad?"block":"none";
       document.getElementById("p3-success-msg").style.display=bad?"none":"block";
